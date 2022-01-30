@@ -1,4 +1,11 @@
-FROM node:14-slim
+FROM node:latest
+
+WORKDIR /usr/src/app
+
+
+COPY package*.json ./
+
+RUN npm install
 
 # Install latest chrome dev package and fonts to support major charsets (Chinese, Japanese, Arabic, Hebrew, Thai and a few others)
 # Note: this installs the necessary libs to make the bundled version of Chromium that Puppeteer
@@ -30,19 +37,9 @@ RUN npm init -y &&  \
     # same layer as npm install to keep re-chowned files from using up several hundred MBs more space
     && groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
     && mkdir -p /home/pptruser/Downloads \
-    && chown -R pptruser:pptruser /home/pptruser \
-    && chown -R pptruser:pptruser /node_modules \
-    && chown -R pptruser:pptruser /package.json \
-    && chown -R pptruser:pptruser /package-lock.json
+    && chown -R pptruser:pptruser /home/pptruser
 
 RUN npm install -g typescript
-RUN npm link typescript
-
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN npm install
 
 COPY . .
 
