@@ -5,7 +5,7 @@ import MainController from "./controllers/MainController";
 
 // Settings
 const route: Application = express();
-const port = 3000;
+const port = process.env.PORT || "3000";
 
 // Body Parsing Middleware
 route.use(express.json());
