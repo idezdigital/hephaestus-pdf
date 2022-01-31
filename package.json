@@ -15,6 +15,14 @@
     "node": "16.x",
     "npm": "8.x"
   },
+  "buildpacks": [
+    {
+      "url": "https://github.com/jontewks/puppeteer-heroku-buildpack"
+    },
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
   "dependencies": {
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
