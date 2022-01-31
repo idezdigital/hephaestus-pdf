@@ -8,7 +8,8 @@ export default class PdfParseController {
         try {
             const browser = await puppeteer.launch({
                 executablePath: 'google-chrome-stable',
-                args: ['--no-sandbox', '--disable-setuid-sandbox']
+                args: ['--no-sandbox', '--disable-setuid-sandbox'],
+                headless: false
             });
             const page = await browser.newPage();
 
@@ -31,7 +32,8 @@ export default class PdfParseController {
         try {
             const browser = await puppeteer.launch({
                 executablePath: 'google-chrome-stable',
-                args: ['--no-sandbox', '--disable-setuid-sandbox']
+                args: ['--no-sandbox', '--disable-setuid-sandbox'],
+                headless: false
             });
             const page = await browser.newPage();
             await page.setContent(request.body.html)
