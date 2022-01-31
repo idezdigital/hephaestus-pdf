@@ -24,10 +24,7 @@ export default class PdfParseController {
 
             return response.send(pdf);
         } catch (error) {
-            return response.status(502).json({
-                "message": 'Failed to parse this view to PDF',
-                "error": error
-            });
+            throw new Error(`${error}`);
         }
     }
 
@@ -52,10 +49,7 @@ export default class PdfParseController {
 
             return response.send(pdf);
         } catch (error) {
-            return response.status(502).json({
-                "message": 'Failed to parse this HTML to PDF',
-                "error": error
-            });
+            throw new Error(`${error}`);
         }
     }
 }

@@ -16,6 +16,7 @@
     "npm": "8.x"
   },
   "dependencies": {
+    "@sentry/node": "^6.17.3",
     "dotenv": "^14.3.2",
     "express": "^4.17.2",
     "puppeteer": "^13.1.2"

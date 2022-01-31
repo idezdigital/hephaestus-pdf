@@ -1,29 +1,43 @@
 import express, { Application, Request, Response } from "express";
+import * as Sentry from '@sentry/node';
+import * as Tracing from "@sentry/tracing";
 import PdfParseController from "./controllers/PdfParserController";
 import TokenValidationMiddleware from "./middlewares/TokenValidationMiddleware";
 import MainController from "./controllers/MainController";
 
 // Settings
-const route: Application = express();
+const app: Application = express();
 const port = process.env.PORT || "3000";
+Sentry.init({
+    dsn: "https://6b7ade0ab284417faa88f0832c8f4975@o1131845.ingest.sentry.io/6176768",
+    integrations: [
+        new Sentry.Integrations.Http({ tracing: true }),
+        new Tracing.Integrations.Express({ app }),
+    ],
+    tracesSampleRate: 1.0,
+});
 
 // Body Parsing Middleware
-route.use(express.json());
-route.use(express.urlencoded({ extended: true }));
+app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.tracingHandler());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Open Routes
-route.get('/', MainController.index)
-route.get('/token', MainController.getToken)
+// Open apps
+app.get('/', MainController.index)
+app.get('/token', MainController.getToken)
 
-route.use(TokenValidationMiddleware.validation)
+app.use(TokenValidationMiddleware.validation)
 
-// Protected Routes
-route.post('/parse-url', PdfParseController.parseUrl)
-route.post('/parse-html', PdfParseController.parseHtml)
+// Protected apps
+app.post('/parse-url', PdfParseController.parseUrl)
+app.post('/parse-html', PdfParseController.parseHtml)
+
+app.use(Sentry.Handlers.errorHandler());
 
 // Listen
 try {
-    route.listen(port, (): void => {
+    app.listen(port, (): void => {
         console.log(`Connected successfully on port ${port}`);
     });
 } catch (error: unknown) {
