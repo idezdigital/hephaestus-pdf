@@ -18,7 +18,11 @@ export default class PdfParseController {
 
             await page.goto(request.body.url);
 
-            const pdf = await page.pdf({format: 'a4' });
+            const pdf = await page.pdf({
+                format: "a4",
+                printBackground: true
+            });
+
             await browser.close();
 
             return response.send(pdf);
@@ -41,7 +45,10 @@ export default class PdfParseController {
             const page = await browser.newPage();
             await page.setContent(request.body.html)
 
-            const pdf = await page.pdf({ format: "a4" });
+            const pdf = await page.pdf({
+                format: "a4",
+                printBackground: true
+            });
 
             await browser.close();
 
