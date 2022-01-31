@@ -7,7 +7,6 @@ export default class PdfParseController {
     {
         try {
             const browser = await puppeteer.launch({
-                executablePath: 'google-chrome-stable',
                 args: [
                     '--no-sandbox',
                     '--disable-setuid-sandbox',
@@ -32,7 +31,6 @@ export default class PdfParseController {
     {
         try {
             const browser = await puppeteer.launch({
-                executablePath: 'google-chrome-stable',
                 args: [
                     '--no-sandbox',
                     '--disable-setuid-sandbox',
