@@ -8,7 +8,7 @@ import MainController from "./controllers/MainController";
 // Settings
 const app: Application = express();
 Sentry.init({
-    dsn: "https://6b7ade0ab284417faa88f0832c8f4975@o1131845.ingest.sentry.io/6176768",
+    dsn: process.env.SENTRY_DNS,
     integrations: [
         new Sentry.Integrations.Http({ tracing: true }),
         new Tracing.Integrations.Express({ app }),
