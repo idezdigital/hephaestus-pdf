@@ -19,6 +19,7 @@ Sentry.init({
 // Body Parsing Middleware
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
+app.use(Sentry.Handlers.errorHandler());
 app.use(express.json({limit: '10mb'}));
 app.use(express.urlencoded({
     limit: '10mb',
