@@ -1,3 +1,3 @@
-export default (): Boolean => {
-    return process.env.APP_DEBUG === 'true';
-};
+export default (): boolean => {
+  return process.env.APP_DEBUG === 'true'
+}
