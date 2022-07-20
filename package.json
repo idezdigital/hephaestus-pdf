@@ -18,8 +18,8 @@
     "npm": "8.x"
   },
   "dependencies": {
-    "@sentry/node": "^6.18.2",
-    "@sentry/tracing": "^6.18.2",
+    "@sentry/node": "^6.19.7",
+    "@sentry/tracing": "^6.19.7",
     "dotenv": "^14.3.2",
     "express": "^4.17.3",
     "puppeteer": "^13.5.1"

@@ -9,7 +9,8 @@ import MainController from './controllers/MainController'
 const app: Application = express()
 
 Sentry.init({
-  dsn: process.env.SENTRY_DNS,
+  dsn: process.env.SENTRY_DSN,
+  environment: process.env.APP_ENV || 'local',
   integrations: [
     new Sentry.Integrations.Http({ tracing: true }),
     new Tracing.Integrations.Express({ app }),
@@ -20,7 +21,6 @@ Sentry.init({
 // Body Parsing Middleware
 app.use(Sentry.Handlers.requestHandler())
 app.use(Sentry.Handlers.tracingHandler())
-app.use(Sentry.Handlers.errorHandler())
 app.use(express.json({ limit: '10mb' }))
 app.use(
   express.urlencoded({
